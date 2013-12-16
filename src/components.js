@@ -139,15 +139,6 @@ Crafty.c('House', {
     }
 });
 
-Crafty.c('Cloud', {
-    init: function() {
-        this.requires('Actor, Scrollable, sprite_cloud')
-            .attr({
-                z: -1
-            });
-    }
-});
-
 Crafty.c('Storm', {
     init: function() {
         this.requires('Actor, Scrollable, Collision, SpriteAnimation, sprite_storm')
@@ -261,18 +252,31 @@ Crafty.c('Twitter', {
     },
 
     share: function() {
-        console.log('share');
+        // soon
     }
 });
 
 Crafty.c('Google', {
     init: function() {
-        this.requires('Button, sprite_google');
+        this.requires('Button, sprite_google')
+            .uniqueBind('Click', this.share);
+    },
+
+    share: function() {
+        //javascript:window.open('https://plus.google.com/share?url=' + Game.url, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');
+        //return false;
+
+        // soon
     }
 });
 
 Crafty.c('Facebook', {
     init: function() {
-        this.requires('Button, sprite_facebook');
+        this.requires('Button, sprite_facebook')
+            .uniqueBind('Click', this.share);
+    },
+
+    share: function() {
+        // soon
     }
 });

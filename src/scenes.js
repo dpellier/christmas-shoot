@@ -20,21 +20,6 @@ Crafty.scene('Game', function() {
     }
 
     /**
-     * Clouds generation
-     */
-//    var generateCloud = function() {
-//        if (Game.currentScene === 'Game') {
-//            var cloud = Crafty.e('Cloud').at(Game.mainGrid.width, randomFromInterval(0, Game.playgroundHeight()));
-//            cloud.scroll(1 + Math.random(), generateCloud);
-//        }
-//    };
-//
-//    var maxCloud = 4;
-//    for (var i = 0; i < maxCloud; i++) {
-//        generateCloud();
-//    }
-
-    /**
      * Storms generation
      */
     var generateStorm = function() {
@@ -47,7 +32,6 @@ Crafty.scene('Game', function() {
     for (var i = 0; i < Game.level.nbStorm; i++) {
         generateStorm();
     }
-
 
     /**
      * Houses generation
@@ -62,7 +46,6 @@ Crafty.scene('Game', function() {
     for (var i = 0; i < Game.level.nbHouse; i++) {
         generateHouse();
     }
-
 
     /**
      * Player creation
@@ -101,9 +84,8 @@ Crafty.scene('GameOver', function() {
 
     setTimeout(function() {
         Crafty.e('Retry').at(0, Game.playgroundHeight() + 8);
-    }, 1000);
+    }, 2000);
 
-    // TODO Share it
     Crafty.e('Twitter').at(20, Game.playgroundHeight() + 6);
     Crafty.e('Google').at(23, Game.playgroundHeight() + 6);
     Crafty.e('Facebook').at(26, Game.playgroundHeight() + 6);
@@ -118,8 +100,7 @@ Crafty.scene('Start', function() {
         Crafty.scene('Game');
     };
 
-    Crafty.load(['assets/cloud.png',
-                 'assets/game.jpg',
+    Crafty.load(['assets/game.jpg',
                  'assets/retry',
                  'assets/santa_dead.png',
                  'assets/sfeir.png',
@@ -128,10 +109,6 @@ Crafty.scene('Start', function() {
                  'assets/sprite_share.png',
                  'assets/sprite_storm.png',
                  'assets/start_button.png'], function() {
-
-        Crafty.sprite(30, 'assets/cloud.png', {
-            sprite_cloud: [0, 0]
-        });
 
         Crafty.sprite(91, 31, 'assets/retry.png', {
             sprite_retry: [0, 0]
