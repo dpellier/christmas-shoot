@@ -72,6 +72,18 @@ Crafty.c('Edge', {
     }
 });
 
+Crafty.c('EdgeX', {
+    init: function() {
+        this.requires('Edge');
+    }
+});
+
+Crafty.c('EdgeY', {
+    init: function() {
+        this.requires('Edge');
+    }
+});
+
 Crafty.c('Score', {
     init: function() {
         this.requires('2D, DOM, Text')
@@ -200,15 +212,20 @@ Crafty.c('Santa', {
         var animationSpeed = 500;
         this.requires('Actor, Fourway, Solid, Collision, SpriteAnimation, sprite_santa')
             .fourway(4)
-            .onHit('Solid', this.stopMovement)
+            .onHit('EdgeX', this.stopX)
+            .onHit('EdgeY', this.stopY)
             .reel('PlayerShoot', animationSpeed, 1, 0, 2);
     },
 
-    stopMovement: function() {
-        this._speed = 0;
+    stopX: function() {
+        if (this._movement) {
+            this.y -= this._movement.y;
+        }
+    },
+
+    stopY: function() {
         if (this._movement) {
             this.x -= this._movement.x;
-            this.y -= this._movement.y;
         }
     },
 

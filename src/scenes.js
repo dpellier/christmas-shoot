@@ -10,13 +10,13 @@ Crafty.scene('Game', function() {
      * Edge generation
      */
     for (var x = 0; x < Game.mainGrid.width; x++) {
-        Crafty.e('Edge').at(x, 0);
-        Crafty.e('Edge').at(x, Game.playgroundHeight() + 2.5);
+        Crafty.e('EdgeX').at(x, 0);
+        Crafty.e('EdgeX').at(x, Game.playgroundHeight() + 2.5);
     }
 
     for (var y = 0; y < Game.mainGrid.height; y++) {
-        Crafty.e('Edge').at(0, y);
-        Crafty.e('Edge').at(Game.mainGrid.width, y);
+        Crafty.e('EdgeY').at(0, y);
+        Crafty.e('EdgeY').at(Game.mainGrid.width, y);
     }
 
     /**
