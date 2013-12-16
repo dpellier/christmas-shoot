@@ -88,18 +88,24 @@ Crafty.scene('Game', function() {
 
 Crafty.scene('GameOver', function() {
     Game.currentScene = 'GameOver';
+    var self = this;
+
     Crafty.background('rgb(0, 0, 0)');
 
     Crafty.e('DeadSanta').at(Game.player.x / Game.mainGrid.tile.width, Game.player.y / Game.mainGrid.tile.height);
-    Crafty.e('FinalScore').at(0, Game.playgroundHeight() + 6);
+    Crafty.e('FinalScore').at(2, Game.playgroundHeight() + 6);
 
     setTimeout(function() {
-        Crafty.e('Retry').at(0, Game.playgroundHeight() + 8);
-    }, 1000);
+        Crafty.e('Retry').at(20, Game.playgroundHeight() + 5.5);
 
-    Crafty.e('Twitter').at(20, Game.playgroundHeight() + 6);
-    Crafty.e('Google').at(23, Game.playgroundHeight() + 6);
-    Crafty.e('Facebook').at(26, Game.playgroundHeight() + 6);
+        self.bind('KeyUp', function(e) {
+            if (e.key === Crafty.keys['SPACE']) {
+                Crafty.scene('Game');
+            }
+        });
+    }, 1000);
+}, function() {
+    this.unbind('KeyUp');
 });
 
 
@@ -107,21 +113,15 @@ Crafty.scene('Start', function() {
     Game.currentScene = 'Start';
     var self = this;
 
-    self.startGame = function() {
-        Crafty.scene('Game');
-    };
-
     Crafty.load(['assets/game.jpg',
                  'assets/retry',
                  'assets/santa_dead.png',
                  'assets/sfeir.png',
                  'assets/sprite_house.png',
                  'assets/sprite_santa.png',
-                 'assets/sprite_share.png',
-                 'assets/sprite_storm.png',
-                 'assets/start_button.png'], function() {
+                 'assets/sprite_storm.png'], function() {
 
-        Crafty.sprite(91, 31, 'assets/retry.png', {
+        Crafty.sprite(160, 39, 'assets/retry.png', {
             sprite_retry: [0, 0]
         });
 
@@ -143,20 +143,16 @@ Crafty.scene('Start', function() {
             sprite_santa: [0, 0]
         });
 
-        Crafty.sprite(40, 'assets/sprite_share.png', {
-            sprite_twitter: [0, 0],
-            sprite_google: [1, 0],
-            sprite_facebook: [2, 0]
-        });
-
         Crafty.sprite(32, 27, 'assets/sprite_storm.png', {
             sprite_storm: [0, 0]
         });
 
-        Crafty.sprite(79, 'assets/start_button.png', {
-            sprite_start_button: [0, 0]
+        self.bind('KeyUp', function(e) {
+            if (e.key === Crafty.keys['SPACE']) {
+                Crafty.scene('Game');
+            }
         });
-
-        Crafty.e('StartButton').at(13.5, 16).uniqueBind('Click', self.startGame);
     });
+}, function() {
+    this.unbind('KeyUp');
 });

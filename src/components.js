@@ -29,13 +29,6 @@ Crafty.c('Actor', {
     }
 });
 
-Crafty.c('Button', {
-    init: function() {
-        this.requires('2D, DOM, Grid, Mouse')
-            .css({cursor: 'pointer'});
-    }
-});
-
 Crafty.c('Scrollable', {
     _speed: 2,
 
@@ -58,12 +51,6 @@ Crafty.c('Scrollable', {
                 self.scroll(direction, scene, onDestroy);
             }, 10);
         }
-    }
-});
-
-Crafty.c('StartButton', {
-    init: function() {
-        this.requires('Button, sprite_start_button');
     }
 });
 
@@ -240,47 +227,6 @@ Crafty.c('DeadSanta', {
 
 Crafty.c('Retry', {
     init: function() {
-        this.requires('Button, sprite_retry')
-            .uniqueBind('Click', this.restart);
-    },
-
-    restart: function() {
-        Crafty.scene('Game');
-    }
-});
-
-Crafty.c('Twitter', {
-    init: function() {
-        this.requires('Button, sprite_twitter')
-            .uniqueBind('Click', this.share);
-    },
-
-    share: function() {
-        // soon
-    }
-});
-
-Crafty.c('Google', {
-    init: function() {
-        this.requires('Button, sprite_google')
-            .uniqueBind('Click', this.share);
-    },
-
-    share: function() {
-        //javascript:window.open('https://plus.google.com/share?url=' + Game.url, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');
-        //return false;
-
-        // soon
-    }
-});
-
-Crafty.c('Facebook', {
-    init: function() {
-        this.requires('Button, sprite_facebook')
-            .uniqueBind('Click', this.share);
-    },
-
-    share: function() {
-        // soon
+        this.requires('Actor, sprite_retry');
     }
 });
