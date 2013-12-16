@@ -39,7 +39,12 @@ Crafty.c('Button', {
 Crafty.c('Scrollable', {
     _speed: 2,
 
-    scroll: function(direction, onDestroy) {
+    scroll: function(direction, scene, onDestroy) {
+        if (Game.currentScene !== scene) {
+            this.destroy();
+            return;
+        }
+
         var self = this;
         self.x -= self._speed * direction;
 
@@ -50,7 +55,7 @@ Crafty.c('Scrollable', {
             }
         } else {
             setTimeout(function() {
-                self.scroll(direction, onDestroy);
+                self.scroll(direction, scene, onDestroy);
             }, 10);
         }
     }

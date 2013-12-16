@@ -23,10 +23,8 @@ Crafty.scene('Game', function() {
      * Storms generation
      */
     var generateStorm = function() {
-        if (Game.currentScene === 'Game') {
-            var storm = Crafty.e('Storm').at(Game.mainGrid.width, randomFromInterval(0, Game.playgroundHeight()));
-            storm.scroll(1 + Math.random(), generateStorm);
-        }
+        var storm = Crafty.e('Storm').at(Game.mainGrid.width, randomFromInterval(0, Game.playgroundHeight()));
+        storm.scroll(1 + Math.random(), 'Game', generateStorm);
     };
 
     for (var i = 0; i < Game.level.nbStorm; i++) {
@@ -37,10 +35,8 @@ Crafty.scene('Game', function() {
      * Houses generation
      */
     var generateHouse = function() {
-        if (Game.currentScene === 'Game') {
-            var house = Crafty.e('House').at(Game.mainGrid.width, 17.2);
-            house.scroll(1, generateHouse);
-        }
+        var house = Crafty.e('House').at(Game.mainGrid.width, 17.2);
+        house.scroll(1, 'Game', generateHouse);
     };
 
     for (var i = 0; i < Game.level.nbHouse; i++) {
@@ -84,7 +80,7 @@ Crafty.scene('GameOver', function() {
 
     setTimeout(function() {
         Crafty.e('Retry').at(0, Game.playgroundHeight() + 8);
-    }, 2000);
+    }, 1000);
 
     Crafty.e('Twitter').at(20, Game.playgroundHeight() + 6);
     Crafty.e('Google').at(23, Game.playgroundHeight() + 6);
