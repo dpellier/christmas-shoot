@@ -9,16 +9,20 @@ Game = {
         }
     },
 
+    initScore: 0,
+    initNbHouse: 1,
+    initNbStorm: 1,
+
     currentScene: '',
-    score: 0,
+    score: this.initScore,
 
     level: {
         threshold: {
             house: 500,
             storm: 1000
         },
-        nbStorm: 1,
-        nbHouse: 1
+        nbStorm: this.initNbStorm,
+        nbHouse: this.initNbHouse
     },
 
     width: function() {
@@ -42,9 +46,9 @@ Game = {
     },
 
     reset: function() {
-        this.score = 0;
-        this.level.nbStorm = 1;
-        this.level.nbHouse = 1;
+        this.score = this.initScore;
+        this.level.nbStorm = this.initNbStorm;
+        this.level.nbHouse = this.initNbHouse;
     }
 };
 

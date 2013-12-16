@@ -138,10 +138,20 @@ Crafty.c('Cloud', {
 
 Crafty.c('Storm', {
     init: function() {
-        this.requires('Actor, Scrollable, Solid, SpriteAnimation, sprite_storm')
-            .reel('storm', 500, 0, 0, 2);
+        this.requires('Actor, Scrollable, Collision, SpriteAnimation, sprite_storm')
+            .reel('storm', 500, 0, 0, 2)
+            .onHit('Santa', this.gameOver);
+
+        var middleX = this.x + (this.w / 2);
+        var middleY = this.y + (this.h / 2);
+        var padding = 10;
+        this.collision([this.x + padding, middleY], [middleX, this.y + padding], [this.x + this.w + padding, middleY], [middleX, this.y + this.h + padding]);
 
         this.animate('storm', -1);
+    },
+
+    gameOver: function() {
+        Crafty.scene('GameOver');
     }
 });
 
@@ -188,9 +198,8 @@ Crafty.c('Santa', {
     maxShoot: 1,
     init: function() {
         var animationSpeed = 500;
-        this.requires('Actor, Fourway, Collision, SpriteAnimation, sprite_santa')
+        this.requires('Actor, Fourway, Solid, Collision, SpriteAnimation, sprite_santa')
             .fourway(4)
-            .onHit('Storm', this.gameOver)
             .onHit('Solid', this.stopMovement)
             .reel('PlayerShoot', animationSpeed, 1, 0, 2);
     },
@@ -208,10 +217,6 @@ Crafty.c('Santa', {
             this.animate('PlayerShoot', 1);
             Crafty.e('Sfeir').at(this.x / Game.mainGrid.tile.width, this.y / Game.mainGrid.tile.height);
         }
-    },
-
-    gameOver: function() {
-        Crafty.scene('GameOver');
     }
 });
 
