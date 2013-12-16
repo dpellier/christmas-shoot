@@ -1,6 +1,8 @@
 
 Crafty.scene('Game', function() {
+    Game.reset();
     Game.currentScene = 'Game';
+
     Crafty.background('url("assets/game.jpg") no-repeat');
     Crafty.e('Score');
 
@@ -139,7 +141,7 @@ Crafty.scene('Start', function() {
             sprite_santa_dead: [0, 0]
         });
 
-        Crafty.sprite(30, 'assets/sfeir.png', {
+        Crafty.sprite(30, 26, 'assets/sfeir.png', {
             sprite_sfeir: [0, 0]
         });
 

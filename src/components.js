@@ -78,7 +78,6 @@ Crafty.c('Score', {
             .textColor('#FFFFFF', 1)
             .unselectable();
 
-        Game.score = 0;
         this.bind('scoreUp', this.increment);
         this.setText(Game.score);
     },

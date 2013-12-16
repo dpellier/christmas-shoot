@@ -39,6 +39,12 @@ Game = {
         Crafty.background('url("assets/start.jpg")');
 
         Crafty.scene('Start');
+    },
+
+    reset: function() {
+        this.score = 0;
+        this.level.nbStorm = 1;
+        this.level.nbHouse = 1;
     }
 };
 
