@@ -34,9 +34,28 @@ Crafty.scene('Game', function() {
     /**
      * Houses generation
      */
+    // Get all possible starting position
+    var position = new Array();
+    for (var i = 0; i < Game.maxNbHouse; i++) {
+        position.push(i * 80);
+    }
+
     var generateHouse = function() {
-        var house = Crafty.e('House').at(Game.mainGrid.width, 17.2);
-        house.scroll(1, 'Game', generateHouse);
+        var xPos = position.slice();
+
+        for (var i = 0; i < Game.level.nbHouse; i++) {
+            var house = Crafty.e('House');
+            house.y = 17.2 * Game.mainGrid.tile.height;
+
+            // First house carry the callback to redraw all on the end of the screen
+            if (i === 0) {
+                house.x = Game.width();
+                house.scroll(1, 'Game', generateHouse);
+            } else {
+                house.x = Game.width() + Number(xPos.splice(randomFromInterval(1, position.length - 1), 1));
+                house.scroll(1, 'Game');
+            }
+        }
     };
 
     for (var i = 0; i < Game.level.nbHouse; i++) {
@@ -60,10 +79,6 @@ Crafty.scene('Game', function() {
     this.uniqueBind('LevelUp', function() {
         for (var i = Crafty('Storm').length; i < Game.level.nbStorm; i++) {
             generateStorm();
-        }
-
-        for (var i = Crafty('House').length; i < Game.level.nbHouse; i++) {
-            generateHouse();
         }
     });
 }, function() {

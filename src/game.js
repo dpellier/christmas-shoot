@@ -12,6 +12,7 @@ Game = {
     initScore: 0,
     initNbHouse: 1,
     initNbStorm: 1,
+    maxNbHouse: 7,
 
     currentScene: '',
     score: this.initScore,

@@ -110,9 +110,8 @@ Crafty.c('Score', {
         if (Game.score % Game.level.threshold.storm === 0) {
             Game.level.nbStorm++;
             Crafty.trigger('LevelUp', this);
-        } else if (Game.score % Game.level.threshold.house === 0) {
+        } else if (Game.score % Game.level.threshold.house === 0 && Game.level.nbHouse < Game.maxNbHouse) {
             Game.level.nbHouse++;
-            Crafty.trigger('LevelUp', this);
         }
     }
 });
