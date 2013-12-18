@@ -230,3 +230,26 @@ Crafty.c('Retry', {
         this.requires('Actor, sprite_retry');
     }
 });
+
+Crafty.c('Sound', {
+    init: function() {
+        this.requires('Actor, SpriteAnimation, sprite_sound')
+            .reel('toggleOff', 1, 1, 0, 1)
+            .reel('toggleOn', 1, 0, 0, 1);
+
+        this.toggleAnimation();
+    },
+
+    toggleSound: function() {
+        Crafty.audio.toggleMute();
+        this.toggleAnimation();
+    },
+
+    toggleAnimation: function() {
+        if (Crafty.audio.muted) {
+            this.animate('toggleOff', 1);
+        } else {
+            this.animate('toggleOn', 1);
+        }
+    }
+});

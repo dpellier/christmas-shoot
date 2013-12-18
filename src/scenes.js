@@ -74,6 +74,14 @@ Crafty.scene('Game', function() {
     });
 
     /**
+     * Audio playing
+     */
+    var sound = Crafty.e('Sound').at(Game.mainGrid.width - 2, 0);
+    if (Crafty.audio.supports('mp3')) {
+        Crafty.audio.play('audio_game', -1);
+    }
+
+    /**
      * Level binding
      */
     this.uniqueBind('LevelUp', function() {
@@ -81,8 +89,16 @@ Crafty.scene('Game', function() {
             generateStorm();
         }
     });
+
+    this.uniqueBind('KeyUp', function(e) {
+        if (e.key === Crafty.keys['M']) {
+            sound.toggleSound();
+        }
+    });
 }, function() {
+    Crafty.audio.stop('audio_game');
     this.unbind('LevelUp');
+    this.unbind('KeyUp');
 });
 
 
@@ -94,6 +110,10 @@ Crafty.scene('GameOver', function() {
 
     Crafty.e('DeadSanta').at(Game.player.x / Game.mainGrid.tile.width, Game.player.y / Game.mainGrid.tile.height);
     Crafty.e('FinalScore').at(2, Game.playgroundHeight() + 6);
+
+    if (Crafty.audio.supports('mp3')) {
+        Crafty.audio.play('audio_end');
+    }
 
     setTimeout(function() {
         Crafty.e('Retry').at(20, Game.playgroundHeight() + 5.5);
@@ -113,13 +133,21 @@ Crafty.scene('Start', function() {
     Game.currentScene = 'Start';
     var self = this;
 
-    Crafty.load(['assets/game.jpg',
+    Crafty.load(['assets/end.mp3',
+                 'assets/jingle_bells.mp3',
+                 'assets/game.jpg',
                  'assets/retry',
                  'assets/santa_dead.png',
                  'assets/sfeir.png',
                  'assets/sprite_house.png',
                  'assets/sprite_santa.png',
+                 'assets/sprite_sound.png',
                  'assets/sprite_storm.png'], function() {
+
+        Crafty.audio.add({
+            audio_end: ['assets/end.mp3'],
+            audio_game: ['assets/jingle_bells.mp3']
+        });
 
         Crafty.sprite(160, 39, 'assets/retry.png', {
             sprite_retry: [0, 0]
@@ -141,6 +169,10 @@ Crafty.scene('Start', function() {
 
         Crafty.sprite(80, 43, 'assets/sprite_santa.png', {
             sprite_santa: [0, 0]
+        });
+
+        Crafty.sprite(32, 'assets/sprite_sound.png', {
+            sprite_sound: [0, 0]
         });
 
         Crafty.sprite(32, 27, 'assets/sprite_storm.png', {
